@@ -2,6 +2,7 @@ class Api::V1::GifsController < ApplicationController
 
   def random
     location = Location.geocoded(params['location'])
-    render json: GifsSerializer.new(location).daily_gifs
+    json_forecast = ForecastSerializer.new(location).location_forecast
+    render json: GifsSerializer.new(json_forecast).daily_gifs
   end
 end
