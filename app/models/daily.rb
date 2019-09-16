@@ -1,5 +1,6 @@
 class Daily
-  attr_reader :time, :summary, :url
+  attr_reader :time, :summary
+  attr_accessor :url
 
   def initialize(attrs = {})
     @time = attrs[:time]
