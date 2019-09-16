@@ -59,3 +59,8 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
+
+def stub_forecast_calls
+  forecast = File.open("./fixtures/forecast.json")
+  stub_request(:get, "https://api.darksky.net/forecast/#{ENV['DARKSKY-API-KEY']}/39.710850,-105.081505").to_return(status:200, body:forecast)
+end
