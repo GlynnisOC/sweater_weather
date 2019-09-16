@@ -1,23 +1,22 @@
 class GeocodeService
 
   def initialize(location)
-    @location = location.split(/, ?/)
+    @location = location.sub(',', '+')
   end
 
   def get_coordinates
-    params = {address: @location}
-    binding.pry
-    get_json(params)
-    JSON.parse(response.body, symbolize_names: true)
+    url = '/maps/api/geocode/json'
+    params = {address: @location, key: ENV['GEOCODE-API-KEY']}
+    get_json(url, params)[:results][0][:geometry][:location]
   end
 
   private
   def connection
-    @_connection ||= Faraday.new("https://maps.googleapis.com/maps/api/geocode/json", params:{key: ENV['GEOCODE-API-KEY']})
+    @_connection ||= Faraday.new("https://maps.googleapis.com")
   end
 
-  def get_json(params = {})
-    response = connection.get(params)
+  def get_json(url, params = {})
+    response = connection.get(url, params)
     JSON.parse(response.body, symbolize_names: true)
   end
 end
