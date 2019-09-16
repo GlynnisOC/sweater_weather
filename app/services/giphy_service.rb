@@ -14,7 +14,7 @@ class GiphyService
       one_times_gif_url = get_json(url, params)[:data][0][:url]
       all_gif_urls << one_times_gif_url
     end
-    all_gif_urls.map do |url|
+    all_gif_urls.flat_map do |url|
       day_objects.each do |daily|
         daily.url = url
       end
