@@ -5,6 +5,7 @@ RSpec.describe '/api/v1/forecast' do
     headers = {'Content-Type' => 'application/json', 'Accept' => 'application/json'}
 
     get '/api/v1/forecast', params: {location: 'denver,co'}, headers: headers
-    expect(status_code).to eq(200)
+    expect(response.status).to eq(200)
+    expect(response.content_type).to eq('application/json')
   end
 end
