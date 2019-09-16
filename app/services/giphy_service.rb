@@ -1,11 +1,11 @@
 class GiphyService
 
-  def initialize
-    @forecast = forecast
-  end
-
-  def gifs
+  def gifs(forecast)
     binding.pry
+    eight_conditions = forecast[:daily][:data]
+    eight_conditions.map do |daily|
+      Daily.new(daily)
+    end
   end
 
   private
