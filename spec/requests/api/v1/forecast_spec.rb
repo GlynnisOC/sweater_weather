@@ -8,8 +8,3 @@ RSpec.describe '/api/v1/forecast' do
     expect(status_code).to eq(200)
   end
 end
-
-
-# GET /api/v1/forecast?location=denver,co
-# Content-Type: application/json
-# Accept: application/json

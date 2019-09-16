@@ -1,12 +1,13 @@
 class GeocodeService
 
   def initialize(location)
-    @location = location.sub(',', '+')
+    @location = location
   end
 
-  def get_coordinates
+  def get_latitude_and_longitude
+    address = @location.sub(',', '+')
     url = '/maps/api/geocode/json'
-    params = {address: @location, key: ENV['GEOCODE-API-KEY']}
+    params = {address: address, key: ENV['GEOCODE-API-KEY']}
     get_json(url, params)[:results][0][:geometry][:location]
   end
 
