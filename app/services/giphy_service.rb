@@ -1,5 +1,13 @@
 class GiphyService
 
+  def initialize
+    @forecast = forecast
+  end
+
+  def gifs
+    binding.pry
+  end
+
   private
   def connection
     @_connection ||= Faraday.new("http://api.giphy.com/v1/gifs/search")
