@@ -5,13 +5,17 @@ class GiphyService
     day_objects = conditions.map do |daily|
       Daily.new(daily)
     end
-    q = day_objects.map do |day|
-      day.summary
+    all_summaries = day_objects.map { |day| day.summary }
+    all_gif_urls = []
+    5.times do
+      q = all_summaries.sample
+      url = "/v1/gifs/search"
+      params = { api_key: ENV['GIPHY-API-KEY'], q: q }
+      one_times_gif_url = get_json(url, params)[:data][0][:url]
+      all_gif_urls << one_times_gif_url
     end
     binding.pry
-    url = "/v1/gifs/search"
-    params = { api_key: ENV['GIPHY-API-KEY'], q: q } 
-    get_json(url, params)
+    all_gif_urls
   end
 
   private
