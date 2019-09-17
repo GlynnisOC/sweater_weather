@@ -8,7 +8,9 @@ RSpec.describe '/api/v1/forecast' do
     expect(response.status).to eq(200)
     expect(response.content_type).to eq('application/json')
 
-    binding.pry
     forecast_data = JSON.parse(response.body, symbolize_names: true)
+
+    expect(forecast_data).to be_a Hash
+    expect(forecast_data[:data][:attributes][:time]).to eq('America/Denver')
   end
 end
