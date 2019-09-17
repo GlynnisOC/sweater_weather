@@ -2,6 +2,8 @@ class Api::V1::ForecastsController < ApplicationController
 
   def show
     location = Location.geocoded(params['location'])
-    render json: ForecastSerializer.new(location).location_forecast
+    f_facade = ForecastFacade.new(location)
+    forecast = f_facade.forecast
+    render json: ForecastSerializer.new(forecast)
   end
 end
