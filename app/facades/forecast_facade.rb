@@ -15,6 +15,6 @@ class ForecastFacade
   end
 
   def location_forecast
-    service.forecast(@location)
+    @_location_forecast ||= service.forecast(@location)
   end
 end
