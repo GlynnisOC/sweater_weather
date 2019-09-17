@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe '/api/v1/users' do
-  it 'returns an image of the city whose forecast I want' do
+  it 'returns the users api key when querying' do
     headers = {'Content-Type' => 'application/json', 'Accept' => 'application/json'}
     params = {"email": "mousse@ballsrgreat.com", "password": 'password', "password_confirmation": 'password' }
 

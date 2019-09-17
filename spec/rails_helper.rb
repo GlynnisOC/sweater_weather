@@ -65,6 +65,13 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 end
 
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
+
 def stub_forecast_calls
   forecast = File.open("./fixtures/forecast.json")
   stub_request(:get, "https://api.darksky.net/forecast/#{ENV['DARKSKY-API-KEY']}/39.710850,-105.081505").to_return(status:200, body:forecast)
