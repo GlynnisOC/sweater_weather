@@ -5,7 +5,7 @@ RSpec.describe '/api/v1/users' do
     headers = {'Content-Type' => 'application/json', 'Accept' => 'application/json'}
     params = {"email": "mousse@ballsrgreat.com", "password": 'password', "password_confirmation": 'password' }
 
-    post '/api/v1/users', params: params, headers: headers
+    post '/api/v1/users', params: params.to_json, headers: headers
     expect(response.status).to eq(201)
     expect(response.content_type).to eq('application/json')
 
