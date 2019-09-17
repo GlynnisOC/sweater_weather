@@ -10,7 +10,7 @@ RSpec.describe '/api/v1/backgrounds' do
 
     background_data = JSON.parse(response.body, symbolize_names: true)
 
-    # expect(forecast_data).to be_a Hash
+    expect(background_data).to be_a Hash
     # expect(forecast_data[:data][:attributes][:time]).to eq('America/Denver')
   end
 end
