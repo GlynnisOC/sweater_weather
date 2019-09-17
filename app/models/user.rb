@@ -6,6 +6,6 @@ class User < ApplicationRecord
   after_initialize :create_api_key
 
   def create_api_key
-    self.update(api_key: SecureRandom.hex)
+    update(api_key: SecureRandom.hex)
   end
 end
