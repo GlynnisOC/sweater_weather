@@ -3,7 +3,7 @@ class UnsplashService
   def background(location)
     url = '/search/photos'
     params = { client_id: ENV['UNSPLASH-API-KEY'], query: location }
-    get_json(url, params)[:results][1][:urls][:regular]
+    get_json(url, params)[:results][0]
   end
 
   private
