@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   get 'api/v1/forecast', to: 'api/v1/forecasts#show'
   get 'api/v1/gifs', to: 'api/v1/gifs#random'
   get 'api/v1/backgrounds', to: 'api/v1/backgrounds#show'
+
+  post 'api/v1/users', to: 'api/v1/users#create'
 end
