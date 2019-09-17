@@ -5,7 +5,7 @@ class Api::V1::SessionsController < ApplicationController
     if user
       render json: { api_key: user.api_key, status: 200 }
     else
-      render json: { error: user.errors.full_messages.to_sentence, status: 400 }
+      render json: { status: 400 }
     end
   end
 end
