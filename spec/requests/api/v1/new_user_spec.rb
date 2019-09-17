@@ -10,7 +10,6 @@ RSpec.describe '/api/v1/users' do
 
     user_data = JSON.parse(response.body, symbolize_names: true)
     expect(user_data).to be_a Hash
-    expect(user_data[:api_key]).to be_truthy
     expect(user_data[:status]).to eq(201)
   end
 end
