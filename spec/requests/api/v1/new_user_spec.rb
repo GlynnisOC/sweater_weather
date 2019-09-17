@@ -6,21 +6,11 @@ RSpec.describe '/api/v1/users' do
     params = {"email": "mousse@ballsrgreat.com", "password": 'password', "password_confirmation": 'password' }
 
     post '/api/v1/users', params: params.to_json, headers: headers
-
-    expect(response.status).to eq(201)
     expect(response.content_type).to eq('application/json')
 
     user_data = JSON.parse(response.body, symbolize_names: true)
     expect(user_data).to be_a Hash
-
+    expect(user_data[:api_key]).to be_truthy
+    expect(user_data[:status]).to eq(201)
   end
 end
-
-# Response:
-#
-# status: 201
-# body:
-#
-# {
-#   "api_key": "jgn983hy48thw9begh98h4539h4",
-# }
