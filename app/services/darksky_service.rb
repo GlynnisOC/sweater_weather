@@ -4,7 +4,6 @@ class DarkskyService
     lat = location[:lat]
     long = location[:lng]
     url = "/forecast/#{ENV['DARKSKY-API-KEY']}/#{lat},#{long}"
-    binding.pry
     get_json(url)
   end
 
