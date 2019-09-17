@@ -4,7 +4,6 @@ class Forecast
               :daily_summary, :high, :low
 
   def initialize(location_forecast)
-    @id = 0
     @latitude = location_forecast[:latitude]
     @longitude = location_forecast[:longitude]
     @current_summary = location_forecast[:currently][:summary]
