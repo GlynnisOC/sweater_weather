@@ -1,27 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe '/api/v1/sessions' do
-  it 'returns an image of the city whose forecast I want' do
-    headers = {'Content-Type' => 'application/json', 'Accept' => 'application/json'}
+  it 'returns a 200 status and users api key' do
+    headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json'}
+    params = { "email": "mousse@ballsrgreat.com", "password": 'password' }
 
-    get '/api/v1/backgrounds', params: {location: 'denver,co'}, headers: headers
+    post '/api/v1/sessions', params: params.to_json, headers: headers
     expect(response.status).to eq(200)
     expect(response.content_type).to eq('application/json')
 
-    background_data = JSON.parse(response.body, symbolize_names: true)
-    expect(background_data).to be_a Hash
-    expect(background_data).to have_key(:data)
+    user_data = JSON.parse(response.body, symbolize_names: true)
+    expect(user_data).to be_a Hash
+    expect(user_data[:status]).to eq(200)
   end
 end
 
-# POST /api/v1/sessions
-# Content-Type: application/json
-# Accept: application/json
-#
-# {
-#   "email": "whatever@example.com",
-#   "password": "password"
-# }
 # Response:
 #
 # status: 200
