@@ -14,7 +14,7 @@ class Forecast
     @humidity = location_forecast[:currently][:humidity]
     @visibility = location_forecast[:currently][:visibility]
     @uv_index = location_forecast[:currently][:uvIndex]
-    @daily_summary = location_forecast[:daily]
+    @daily_summary = location_forecast[:daily][:summary]
     @high = location_forecast[:daily][:data][0][:temperatureHigh].to_i
     @low = location_forecast[:daily][:data][0][:temperatureLow].to_i
   end
