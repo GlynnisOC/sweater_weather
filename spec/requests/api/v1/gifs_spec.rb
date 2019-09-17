@@ -9,5 +9,3 @@ RSpec.describe '/api/v1/gifs' do
     expect(response.content_type).to eq('application/json')
   end
 end
-
-# /api/v1/gifs?location=denver,co

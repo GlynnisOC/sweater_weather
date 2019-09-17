@@ -7,5 +7,8 @@ RSpec.describe '/api/v1/forecast' do
     get '/api/v1/forecast', params: {location: 'denver,co'}, headers: headers
     expect(response.status).to eq(200)
     expect(response.content_type).to eq('application/json')
+
+    binding.pry
+    forecast_data = JSON.parse(response.body, symbolize_names: true)
   end
 end
