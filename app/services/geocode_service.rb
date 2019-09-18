@@ -7,7 +7,7 @@ class GeocodeService
   def get_latitude_and_longitude
     address = @location.sub(',', '+')
     url = '/maps/api/geocode/json'
-    params = {address: address, key: ENV['GEOCODE-API-KEY']}
+    params = {address: address, key: ENV['GOOGLE-API-KEY']}
     get_json(url, params)[:results][0][:geometry][:location]
   end
 
