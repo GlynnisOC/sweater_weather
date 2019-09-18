@@ -11,6 +11,6 @@ RSpec.describe '/api/v1/forecast' do
     forecast_data = JSON.parse(response.body, symbolize_names: true)
 
     expect(forecast_data).to be_a Hash
-    expect(forecast_data[:data][:attributes][:time]).to eq('America/Denver')
+    expect(forecast_data[:data][:attributes][:latitude]).to eq(39.7392358)
   end
 end
