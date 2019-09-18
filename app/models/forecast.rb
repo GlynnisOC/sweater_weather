@@ -1,20 +1,25 @@
 class Forecast
-  attr_reader :id, :latitude, :longitude, :current_summary, :time,
-              :feels_like, :current_temp, :humidity, :visibility, :uv_index,
-              :daily_summary, :high, :low
+  attr_reader :id, :latitude, :longitude, :current_summary
 
   def initialize(location_forecast)
     @latitude = location_forecast[:latitude]
     @longitude = location_forecast[:longitude]
-    @current_summary = location_forecast[:currently][:summary]
-    @time = location_forecast[:timezone]
-    @feels_like = location_forecast[:currently][:apparentTemperature].to_i
-    @current_temp = location_forecast[:currently][:temperature].to_i
-    @humidity = location_forecast[:currently][:humidity]
-    @visibility = location_forecast[:currently][:visibility]
-    @uv_index = location_forecast[:currently][:uvIndex]
-    @daily_summary = location_forecast[:daily][:summary]
-    @high = location_forecast[:daily][:data][0][:temperatureHigh].to_i
-    @low = location_forecast[:daily][:data][0][:temperatureLow].to_i
+    @current_summary = current_forecast
+    @hourly_summary = location_forecast[:hourly]
+    @daily_summary = location_forecast[:daily]
+  end
+
+  def current_forecast
+    {
+    time: Time.at(location_forecast[:currently][:time]).to_time,
+    summary: location_forecast[:currently][:summary],
+    image: location_forecast[:currently][:icon],
+    temperature: location_forecast[:currently][:temperature],
+    feels_like: location_forecast[:currently][:apparentTemperature],
+    humidity: location_forecast[:currently][:humidity],
+    wind: location_forecast[:currently][:windSpeed],
+    uv_index: location_forecast[:currently][:uvIndex],
+    visibility: location_forecast[:currently][:visibility]
+    }
   end
 end
