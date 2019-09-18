@@ -1,15 +1,15 @@
 class Forecast
-  attr_reader :id, :latitude, :longitude, :current_summary
+  attr_reader :id, :latitude, :longitude, :current_summary, :hourly_summary, :daily_summary
 
   def initialize(location_forecast)
     @latitude = location_forecast[:latitude]
     @longitude = location_forecast[:longitude]
-    @current_summary = current_forecast
+    @current_summary = current_forecast(location_forecast)
     @hourly_summary = location_forecast[:hourly]
     @daily_summary = location_forecast[:daily]
   end
 
-  def current_forecast
+  def current_forecast(location_forecast)
     {
     time: Time.at(location_forecast[:currently][:time]).to_time,
     summary: location_forecast[:currently][:summary],
