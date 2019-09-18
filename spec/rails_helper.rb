@@ -1,7 +1,7 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start 'rails' #always pass this string when running test files in rails
 # require 'securerandom'
 
 ENV['RAILS_ENV'] ||= 'test'
