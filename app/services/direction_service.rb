@@ -6,6 +6,7 @@ class DirectionService
     destination = trip_points[:destination]
     params = { origin: origin, destination: destination, key: ENV['GOOGLE-API-KEY'] }
     get_json(url, params)[:routes][0][:legs][0][:duration]
+    #dont wittle down here but in facade instead to make code more reusable
   end
 
   private
