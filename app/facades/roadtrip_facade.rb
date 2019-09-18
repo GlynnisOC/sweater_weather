@@ -5,15 +5,14 @@ class RoadtripFacade
   end
 
   def expected_forecast
-    # binding.pry
-    trip_duration
-
+    forecast_summary = future_forecast[:currently][:summary]
+    temperature = future_forecast[:currently][:temperature]
+    Roadtrip.new(forecast_summary, temperature, trip_duration[:text])
   end
 
-  # def trip_points_lat_and_long
-  #   origin = Location.geocoded(@trip_points[:origin])
-  #   destination = Location.geocoded(@trip_points[:destination])
-  # end
+  def future_forecast
+    @_future_forecast ||= ds_service.get_future_forecast(@trip_points, trip_duration)
+  end
 
   def trip_duration
     @_trip_duration ||= dir_service.get_drive_duration(@trip_points)
@@ -22,10 +21,6 @@ class RoadtripFacade
   private
   def ds_service
     @_ds_service ||= DarkskyService.new
-  end
-
-  def geo_service
-    @_geo_service ||= GeocodeService.new
   end
 
   def dir_service
