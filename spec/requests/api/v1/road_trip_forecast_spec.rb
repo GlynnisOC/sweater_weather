@@ -18,4 +18,15 @@ RSpec.describe '/api/v1/road_trip' do
     expect(future_forecast[:data][:attributes]).to have_key(:temperature)
     expect(future_forecast[:data][:attributes]).to have_key(:travel_time)
   end
+
+  it 'returns 401 status if no api key, or it is incorrect' do
+    user = User.create!('email': 'mousse@ballsrgreat.com', 'password': 'password', 'password_confirmation': 'password')
+
+    headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json'}
+    params = { "origin": "Denver,CO", "destination": "Pueblo,CO", "api_key": "#{SecureRandom.hex}" }
+
+    post '/api/v1/road_trip', params: params.to_json, headers: headers
+    data = JSON.parse(response.body, symbolize_names: true)
+    expect(data[:status]).to eq(401)
+  end
 end
