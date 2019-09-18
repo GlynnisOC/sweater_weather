@@ -14,17 +14,8 @@ RSpec.describe '/api/v1/road_trip' do
     future_forecast = JSON.parse(response.body, symbolize_names: true)
 
     expect(future_forecast).to be_a Hash
-    expect(future_forecast).to have_key(:temperature)
-    expect(future_forecast).to have_key(:summary)
-    expect(future_forecast).to have_key(:estimated_travel_time)
+    expect(future_forecast[:data][:attributes]).to have_key(:forecast)
+    expect(future_forecast[:data][:attributes]).to have_key(:temperature)
+    expect(future_forecast[:data][:attributes]).to have_key(:travel_time)
   end
 end
-
-# API key must be sent
-# If no API key or an incorrect key is provided return 401 (Unauthorized)
-# in order to find out how long it will take to travel from the two locations,
-# nd then deliver the weather forecast for the hour of arrival. For example, Denver
-#  to Pueblo would take two hours. You will deliver a forecast two hours in
-#  the future that includes the temperature and summary, and estimated travel time.
-# The structure of the response is up to you, but should be JSON API 1.0
-# Compliant.
