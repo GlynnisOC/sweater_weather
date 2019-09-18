@@ -1,13 +1,11 @@
 class DirectionService
 
-  def initialize(origin, destination)
-    @origin = origin
-    @destination = destination
-  end
-
-  def get_drive_duration
+  def get_drive_duration(trip_points)
     url = '/maps/api/directions/json'
-    params = {origin: @origin, destination: @destination, key: ENV['GOOGLE-API-KEY']}
+    origin = trip_points[:origin]
+    destination = trip_points[:destination]
+    params = { origin: origin, destination: destination, key: ENV['GOOGLE-API-KEY'] }
+    get_json(url, params)[:routes][0][:legs][0][:duration]
   end
 
   private
@@ -15,7 +13,7 @@ class DirectionService
     @_connection ||= Faraday.new("https://maps.googleapis.com")
   end
 
-  def get_json(url, params = {})
+  def get_json(url, params)
     response = connection.get(url, params)
     JSON.parse(response.body, symbolize_names: true)
   end
