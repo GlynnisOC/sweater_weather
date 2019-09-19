@@ -3,9 +3,9 @@ class User < ApplicationRecord
   validates :password, confirmation: true
   has_secure_password
 
-  after_initialize :create_api_key
+  after_create :new_api_key
 
-  def create_api_key
+  def new_api_key
     update(api_key: SecureRandom.hex)
   end
 end
