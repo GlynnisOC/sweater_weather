@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe '/api/v1/road_trip' do
   it 'returns the forecast for weather upon arrival on a road trip' do
-    user = User.create!('email': 'mousse@ballsrgreat.com', 'password': 'password', 'password_confirmation': 'password')
+    user = User.new('email': 'mousse@ballsrgreat.com', 'password': 'password', 'password_confirmation': 'password')
+    user.save
 
     headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json'}
     params = { "origin": "Denver,CO", "destination": "Pueblo,CO", "api_key": "#{user.api_key}" }
@@ -20,7 +21,8 @@ RSpec.describe '/api/v1/road_trip' do
   end
 
   it 'returns 401 status if no api key, or it is incorrect' do
-    user = User.create!('email': 'mousse@ballsrgreat.com', 'password': 'password', 'password_confirmation': 'password')
+    user = User.new('email': 'mousse@ballsrgreat.com', 'password': 'password', 'password_confirmation': 'password')
+    user.save
 
     headers = { 'Content-Type' => 'application/json', 'Accept' => 'application/json'}
     params = { "origin": "Denver,CO", "destination": "Pueblo,CO", "api_key": "#{SecureRandom.hex}" }
